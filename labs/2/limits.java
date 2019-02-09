@@ -3,6 +3,8 @@ import java.util.Random;
 //Write a Java program that asks the user for a lower limit integer, 
 //and upper limit and prints three
 //randomly generated integer values between the two limits. 
+
+// JA: You are missing the main method
 public class limits {
 	
 	public void randLim() {

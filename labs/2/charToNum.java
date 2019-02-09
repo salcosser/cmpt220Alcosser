@@ -4,6 +4,8 @@ import java.util.Scanner;
 //2-6-2019
 //Write a Java program that prompts the user to enter two characters, 
 //adds them up and prints the integer value of the result. 
+
+// JA: You are missing the main method
 public class charToNum {
 	public void convert() {
 		//making the scanner
