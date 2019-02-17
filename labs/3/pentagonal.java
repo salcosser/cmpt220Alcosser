@@ -21,7 +21,7 @@ public class pentagonal {
 	}
 	//the mathematical formula for finding pentagonal numbers converted into java code
 	public static double pentFunc(int n) {
-		double pentNum = (Math.pow(3 * n, 2) - n)/2;
+		double pentNum = (3 * Math.pow( n, 2) - n)/2; // JA
 		return pentNum;
 	}
 }

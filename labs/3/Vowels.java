@@ -9,7 +9,7 @@ public class Vowels {
 	public static void main(String[] args) {
 		Scanner input =  new Scanner(System.in);
 		System.out.println("What string do you want to count the vowels in?");
-		System.out.println(vowels(input.next()));
+		System.out.println(vowels(input.next())); // JA: Need to use input.nextLine()
 	}
 	
 	// function that counts the vowels by incrementing through the whole string and seeing if the indexed character is an a, e, i, o, or u, after being converted to lower case to keep things simple

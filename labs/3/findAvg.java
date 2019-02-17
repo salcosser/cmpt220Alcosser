@@ -7,6 +7,7 @@ public class findAvg {
 	// simple main method implementing the average function
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		// JA: Had to read the numbers from standard input
 		System.out.print(average(33,4.3, 776));
 	}
 	// simple average function which takes three inputs as doubles and averages them, then returning the result
