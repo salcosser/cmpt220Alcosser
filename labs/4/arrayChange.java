@@ -19,8 +19,8 @@ public class arrayChange {
 		System.out.println(holder[3] + " "+ 3);
 		System.out.println(holder[7] + " "+ 7);
 		//using a new way to modify the array
-		newWay(holder, 3, 10);
-		newWay(holder, 7, 100);
+		listEdit(holder, 3, 10);
+		listEdit(holder, 7, 100);
 		//showing how the listEdit function changed the values
 		System.out.println("values in their indexes after the listEdit function:");
 		System.out.println(holder[3] + " "+ 3);
@@ -42,7 +42,7 @@ public class arrayChange {
 	}
 
 	//abstract concept which inserts a value into a designated index and shifts all values after down
-	public static void newWay(int[] list,int pos, int x) {
+	public static void listEdit(int[] list,int pos, int x) {
 		int n = 0;
 		while(list[n] != -1) {
 			n++;
