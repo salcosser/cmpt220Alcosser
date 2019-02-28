@@ -33,7 +33,7 @@ public class noRepeat_1 {
 
          
       }   
-	static void remRepeats(int[] list) {
+	public static void remRepeats(int[] list) {
 		//getting the length of the list
         int len = list.length;
         //Comparing each element with all other elements
