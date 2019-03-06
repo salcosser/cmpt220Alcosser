@@ -15,20 +15,18 @@ public class sameArray {
 		// TODO Auto-generated method stub
 		//setup
 		Scanner input = new Scanner(System.in);
-		System.out.println("How many values do you want to have in the first list?");
+		System.out.println("List 1");
+		System.out.println("first give the length of the list and then the values");
 		//first list intake
 		int len1 = input.nextInt();
-		System.out.println("What are those values?");
-		
 		int[] list1 = new int[len1];
 		for(int i = 0;i<len1;i++) {
 			list1[i] = input.nextInt();
 		}
 		//second list intake
-		System.out.println("How many values do you want to have in the second list?");
-		
+		System.out.println("List 2");
+		System.out.println("first give the length of the list and then the values");
 		int len2 = input.nextInt();
-		System.out.println("What are those values?");
 		int[] list2 = new int[len2];
 		for(int n = 0;n<len1;n++) {
 			list2[n] = input.nextInt();
@@ -40,6 +38,8 @@ public class sameArray {
 		if(x.length != y.length) {
 			return false;
 		}
+		Arrays.sort(x);
+		Arrays.sort(y);
 		for(int i =0;i<x.length;i++) {
 			if(Arrays.binarySearch(y, x[i])!= -1) {
 				continue;
