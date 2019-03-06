@@ -27,7 +27,7 @@ public class stdDev {
 		double mean= mean(x);
 		double meanHolder = 0;
 		for(int i = 0;i<=x.length;i++) {
-			meanHolder += (x[i] - mean) * (x[i] - mean);
+			meanHolder += Math.pow((x[i] - mean), 2);
 			
 		}
 		return Math.sqrt(meanHolder /(x.length -1));
