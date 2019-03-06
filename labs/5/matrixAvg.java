@@ -2,8 +2,7 @@ import java.util.Scanner;
 
 //Sam Alosser
 //3-5-19
-//Write a Java program to transpose a matrix. The transpose of a matrix is a new matrix
-//whose rows are the columns of the original matrix.
+//write a function that averages the values of the rows in a specific column
 
 public class matrixAvg {
 
@@ -26,10 +25,10 @@ public class matrixAvg {
 		//taking the column to be averaged
 		System.out.println("What column do you want to average?");
 		int selCol = input.nextInt();
-		System.out.println("The average of column "+ selCol + " is " + averageColumn(matrix, selCol));
+		System.out.println("The average of column "+ selCol + " is " + averageRow(matrix, selCol));
 	}
 	//simple average function which averages the column
-	public static double averageColumn(double[][] array, int column) {
+	public static double averageRow(double[][] array, int column) {
 		double sum = 0;
 		for(int i = 0;i<array.length;i++) {
 			sum+=array[i][column];

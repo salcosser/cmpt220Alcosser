@@ -24,11 +24,13 @@ public class stdDev {
 		System.out.printf("The standard deviation of your 10 random numbers is:  %5.2f", deviation(bigSet));
 	}
 	public static double deviation(double[] x) {
-		double first = x[0];
-		double mean=  mean(x);
-		double len = x.length;
-		double above = (( (first - mean) * (first - mean) ));
-		return Math.sqrt(above /2);
+		double mean= mean(x);
+		double meanHolder = 0;
+		for(int i = 0;i<=x.length;i++) {
+			meanHolder += (x[i] - mean) * (x[i] - mean);
+			
+		}
+		return Math.sqrt(meanHolder /(x.length -1));
 	}
 	public static double mean(double[] x) {
 		double sum = 0;
