@@ -26,7 +26,7 @@ public class stdDev {
 	public static double deviation(double[] x) {
 		double mean= mean(x);
 		double meanHolder = 0;
-		for(int i = 0;i<=x.length;i++) {
+		for(int i = 0;i<x.length;i++) {
 			meanHolder += Math.pow((x[i] - mean), 2);
 			
 		}
