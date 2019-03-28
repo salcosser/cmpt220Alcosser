@@ -53,7 +53,7 @@ public class Game1 {
 		System.out.println("-----");
 		System.out.println("HOME TEAM");
 		for(int i  = 0; i< game.getHomeGoals().length;i++) {
-			if(game.getHomeGoals()[i] != null) {	//not doing anything as the whole list is still null
+			if(game.getHomeGoals()[i] != null) {	
 				System.out.print("goal number " + (i+1) + " was scored at " + game.getHomeGoals()[i].getMinute());
 				System.out.println(" by " + game.getHomeGoals()[i].getPlayer().getName() + " for the "+ game.getHomeGoals()[i].getPlayer().getTeam() + " team." );
 				System.out.println("*****");
@@ -66,7 +66,7 @@ public class Game1 {
 		System.out.println("-----");
 		System.out.println("VISITOR TEAM");
 		for(int n  = 0; n< game.getVisitorGoals().length;n++) {
-			if(game.getVisitorGoals()[n] != null) {	//not doing anything as the whole list is still null
+			if(game.getVisitorGoals()[n] != null) {	
 				System.out.print("goal number " + (n+1) + " was scored at " + game.getVisitorGoals()[n].getMinute());
 				System.out.println(" by " + game.getVisitorGoals()[n].getPlayer().getName() + " for the "+ game.getVisitorGoals()[n].getPlayer().getTeam() + " team." );
 				System.out.println("*****");
