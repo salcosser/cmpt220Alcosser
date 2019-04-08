@@ -12,7 +12,7 @@ public class CourseTest {
 		math.addStudent("Jane Doe");
 		math.addStudent("Lorem j Ipsum");
 		math.dropStudent("Jane Doe"); //removing Jane
-		for(String name: roster) {	//simple for loop printing out the names
+		for(String name: math.getStudents()) {	//simple for loop printing out the names
 			System.out.println(name);
 		}
 	}
