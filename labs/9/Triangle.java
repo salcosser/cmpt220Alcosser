@@ -11,13 +11,7 @@ public class Triangle extends GeometricObject{
 		super();
 	}
 	//arg constructor with changes to throw exceptions in the case of an illegal triangle
-	Triangle(double side1, double side2, double side3) throws IllegalTriangleException{
-		if(((side1 + side2) <= side3) || ((side2 + side3) <= side1) || ((side1  + side3) <= side2)) {
-			throw new IllegalTriangleException();
-		}
-		
-		
-		
+	Triangle(double side1, double side2, double side3) {
 		
 		this.side1 = side1;
 		this.side2 = side2;

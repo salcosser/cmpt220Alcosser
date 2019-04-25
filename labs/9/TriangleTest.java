@@ -13,6 +13,9 @@ public class TriangleTest {
 		double s1 = input.nextDouble();
 		double s2 = input.nextDouble();
 		double s3 = input.nextDouble();
+		if(((s1 + s2) <= s3) || ((s2 + s3) <= s1) || ((s1  + s3) <= s2)) {
+			throw new IllegalTriangleException();
+		}
 		//making the triangle
 		Triangle t=  new Triangle(s1,s2,s3);
 		//getting the color of the triangle
