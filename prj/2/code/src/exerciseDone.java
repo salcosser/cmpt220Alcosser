@@ -49,12 +49,12 @@ public class exerciseDone implements Serializable{
 	
 
 	
-	//@ManyToOne(cascade=CascadeType.ALL)
-	//@JoinColumn(name="workoutid",referencedColumnName = "idworkouts", insertable = false, updatable = false)// debugging purposes
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="workoutid",referencedColumnName = "idworkouts", insertable = false, updatable = false)// debugging purposes
 	private Workout wO;
 
-	@Column(name="workoutid")
-	private int woID = wO.getIdworkouts();
+	//@Column(name="workoutid")
+	//private int woID = wO.getIdworkouts();
 	
 	public int getwO() {
 		return wO.getIdworkouts();

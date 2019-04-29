@@ -117,7 +117,7 @@ public class Homepage {
 			Session sessionW = fWorkout.getCurrentSession();
 			sessionW.beginTransaction();
 			Workout nWorkout = new Workout(new Date(),cUser.getId());
-			session.save(nWorkout);
+			session.merge(nWorkout);
 			sessionW.getTransaction().commit();
 			
 			Tracker track = new Tracker(cUser, nWorkout);
