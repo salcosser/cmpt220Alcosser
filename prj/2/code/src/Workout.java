@@ -23,25 +23,23 @@ public class Workout{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="idworkouts")
-	private int idworkouts;
+	@Column(name="workoutid")
+	private int workoutid;
 	
 	@Column(name="date")
 	private Date date;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name="workoutid", referencedColumnName= "idworkouts")
-	private List<exerciseDone> exDone = new ArrayList<exerciseDone>();
+	
 	
 	@Column(name="users_id")
 	private int userId;
 	
 	
-	public int getIdworkouts() {
-		return idworkouts;
+	public int getWorkoutid() {
+		return workoutid;
 	}
-	public void setIdworkouts(int idworkouts) {
-		this.idworkouts = idworkouts;
+	public void setWorkoutid(int workoutid) {
+		this.workoutid = workoutid;
 	}
 
 
@@ -68,7 +66,7 @@ public class Workout{
 	}
 	@Override
 	public String toString() {
-		return "Workout [idworkouts=" + idworkouts + ", date="
+		return "Workout [workoutid=" + workoutid + ", date="
 				+ date +  ", userId=" + userId + "]";
 	}
 	

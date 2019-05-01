@@ -140,7 +140,7 @@ public class LogIn {
 					
 					
 					Query userS = session.createQuery("from User u where u.username = '"+"salcosser4412"+ "' and u.password =:passw");
-					List<User> resolved = userS.setParameter("passw", "password123").getResultList(); // should be psss
+					List<User> resolved = userS.setParameter("passw", "password123").getResultList(); // should be pass
 					if(resolved.size() ==1) {
 						User currUser = resolved.get(0);
 						System.out.println(currUser);

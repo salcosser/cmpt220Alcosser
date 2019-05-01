@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Target;
+
 @Entity
 @Table(name="exercisedone")		//connecting this class to create an entity in the exercisedone table in MySQL
 public class exerciseDone implements Serializable{
@@ -45,19 +47,28 @@ public class exerciseDone implements Serializable{
 	@Column(name="sets")
 	private int sets;
 	
-	
-	
-
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="workoutid",referencedColumnName = "idworkouts", insertable = false, updatable = false)// debugging purposes
+	@ManyToOne(optional=false)
+	@JoinColumn(name="workoutid", nullable=false, updatable=false)
 	private Workout wO;
-
-	//@Column(name="workoutid")
-	//private int woID = wO.getIdworkouts();
+	//@JoinColumn(name="workoutid", referencedColumnName="workoutid")
 	
-	public int getwO() {
-		return wO.getIdworkouts();
+	
+	
+	
+	
+	
+	
+
+	
+	
+	public int getWorkoutId() {
+		return wO.getWorkoutid();
+	}
+
+	
+
+	public Workout getwO() {
+		return wO;
 	}
 
 	public void setwO(Workout wO) {

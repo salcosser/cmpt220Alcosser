@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -87,8 +88,30 @@ public class Tracker {
 		Session sessionE = factoryExercises.getCurrentSession();
 		sessionE.beginTransaction();
 		
-		
-		
+		SessionFactory factoryWO = new Configuration()
+				.configure()
+				.addAnnotatedClass(Workout.class)
+				.buildSessionFactory();
+		//create session
+		Session sessionWO = factoryWO.getCurrentSession();
+		sessionWO.beginTransaction();
+		System.out.println(w.getWorkoutid());
+		try {
+			int currWOID = w.getWorkoutid();
+			List<Workout> wO = sessionWO.createQuery("from Workout w where w.workoutid = " + currWOID, Workout.class).getResultList();
+			Workout wOCurrent = wO.get(0);
+		}
+		catch(Exception e) {
+			System.out.println("ERROR");
+			e.printStackTrace();
+			System.out.println("ERROR");
+		}
+		int currWOID = w.getWorkoutid();
+		List<Workout> wO = sessionWO.createQuery("from Workout w where w.workoutid = " + currWOID, Workout.class).getResultList();
+		Workout wOCurrent = wO.get(0);
+		sessionWO.close();
+		System.out.println("length of the query of the workouts of id: "+ w.getWorkoutid()+ "is" + wO.size());
+		System.out.println(w.toString());
 		List<exercises> exList = sessionE.createQuery("from exercises").getResultList();
 		String[] exListNames = new String[exList.size()];
 		for(int i = 0; i<exList.size(); i++) {
@@ -147,9 +170,9 @@ public class Tracker {
 			int exId = exIdFinder.get(0).getIdExercises();
 			int sets = (int) setsCount.getValue();
 			int reps = (int) repsCount.getValue();
-			exerciseDone nExD = new exerciseDone(exId, reps, sets,w,imperialMass);
+			exerciseDone nExD = new exerciseDone(exId, reps, sets,wOCurrent,imperialMass);
 			System.out.println(nExD.toString()); 			//debugging line
-			sessionED.merge(w);
+			
 			sessionED.save(nExD);
 			}
 		});
@@ -162,12 +185,13 @@ public class Tracker {
 				
 				try {
 					sessionED.getTransaction().commit();
+					
 				}catch(Exception n) {
 					System.out.println("error:**********");
 					n.printStackTrace();
 					System.out.println("***********");
 				}
-				
+				JOptionPane.showMessageDialog(frame, "Workout submitted");
 				frame.setVisible(false);
 				frame.dispose();
 				Homepage reHome = new Homepage(cUser);

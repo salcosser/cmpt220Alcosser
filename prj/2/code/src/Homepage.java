@@ -71,7 +71,7 @@ public class Homepage {
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		
-		JLabel lblNewLabel = new JLabel(cUser.getUsername().toString());
+		JLabel lblNewLabel = new JLabel("Welcome back " + cUser.getUsername().toString());
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -79,10 +79,8 @@ public class Homepage {
 			}
 		});
 		SpringLayout springLayout = new SpringLayout();
-		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 39, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 142, SpringLayout.WEST, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, 55, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, 302, SpringLayout.WEST, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 43, SpringLayout.NORTH, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 86, SpringLayout.WEST, frame.getContentPane());
 		frame.getContentPane().setLayout(springLayout);
 		frame.getContentPane().add(lblNewLabel);
 		JButton btnViewPastWorkouts = new JButton("My Workouts");
@@ -107,6 +105,7 @@ public class Homepage {
 		frame.getContentPane().add(btnMyBest);
 		
 		JButton btnTrackNewWorkout = new JButton("Track New Workout");
+		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, -24, SpringLayout.NORTH, btnTrackNewWorkout);
 		btnTrackNewWorkout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			SessionFactory fWorkout = new Configuration()
@@ -117,9 +116,9 @@ public class Homepage {
 			Session sessionW = fWorkout.getCurrentSession();
 			sessionW.beginTransaction();
 			Workout nWorkout = new Workout(new Date(),cUser.getId());
-			session.merge(nWorkout);
+			sessionW.save(nWorkout);
 			sessionW.getTransaction().commit();
-			
+			sessionW.close();
 			Tracker track = new Tracker(cUser, nWorkout);
 			frame.setVisible(false);
 			track.frame.setVisible(true);
@@ -134,6 +133,7 @@ public class Homepage {
 		frame.getContentPane().add(btnTrackNewWorkout);
 		
 		JList list = new JList();
+		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, -56, SpringLayout.EAST, list);
 		springLayout.putConstraint(SpringLayout.NORTH, list, 232, SpringLayout.NORTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, list, 301, SpringLayout.WEST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, list, 146, SpringLayout.NORTH, frame.getContentPane());
@@ -168,5 +168,17 @@ public class Homepage {
 		springLayout.putConstraint(SpringLayout.SOUTH, btnRemoveInjury, 0, SpringLayout.SOUTH, btnMyBest);
 		springLayout.putConstraint(SpringLayout.EAST, btnRemoveInjury, -47, SpringLayout.EAST, frame.getContentPane());
 		frame.getContentPane().add(btnRemoveInjury);
+		
+		JButton btnNewButton = new JButton("Submit new Exercise");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			SubmitWorkout sWorkout = new SubmitWorkout();
+			frame.setVisible(false);
+			sWorkout.frame.setVisible(true);
+			}
+		});
+		springLayout.putConstraint(SpringLayout.SOUTH, btnNewButton, -35, SpringLayout.SOUTH, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, btnNewButton, -6, SpringLayout.WEST, btnRecordInjury);
+		frame.getContentPane().add(btnNewButton);
 	}
 }

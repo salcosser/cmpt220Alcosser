@@ -25,7 +25,7 @@ import java.awt.event.ActionEvent;
 public class Injury {
 
 	JFrame frame;
-	private User cUser;
+	 User cUser;
 	/**
 	 * Launch the application.
 	 */
@@ -34,7 +34,7 @@ public class Injury {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Injury window = new Injury();
+					Injury window = new Injury(cUser);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,8 +55,9 @@ public class Injury {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(User cUser) {
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		SpringLayout springLayout = new SpringLayout();
