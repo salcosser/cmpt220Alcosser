@@ -172,7 +172,7 @@ public class Homepage {
 		JButton btnNewButton = new JButton("Submit new Exercise");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			SubmitWorkout sWorkout = new SubmitWorkout();
+			SubmitExercise sWorkout = new SubmitExercise(cUser);
 			frame.setVisible(false);
 			sWorkout.frame.setVisible(true);
 			}

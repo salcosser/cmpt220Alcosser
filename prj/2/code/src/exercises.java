@@ -49,4 +49,10 @@ public class exercises implements Serializable {
 	public String toString() {
 		return "exercises [idExercises=" + idExercises + ", name=" + name + ", mGroup=" + mGroup + "]";
 	}
+	public exercises(String name, String mGroup) {
+		super();
+		this.name = name;
+		this.mGroup = mGroup;
+	}
+	exercises(){};
 }
