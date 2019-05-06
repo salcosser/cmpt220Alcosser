@@ -98,6 +98,13 @@ public class Homepage {
 		frame.getContentPane().add(btnViewPastWorkouts);
 		
 		JButton btnMyBest = new JButton("My Best");
+		btnMyBest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				Metrics m = new Metrics(cUser);
+				m.frame.setVisible(true);
+			}
+		});
 		springLayout.putConstraint(SpringLayout.NORTH, btnMyBest, 162, SpringLayout.NORTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, btnMyBest, 12, SpringLayout.WEST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, btnMyBest, 187, SpringLayout.NORTH, frame.getContentPane());

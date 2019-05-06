@@ -94,7 +94,7 @@ public class SubmitExercise {
 		lblMuscleGroup.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMuscleGroup.setBounds(285, 77, 88, 14);
 		frame.getContentPane().add(lblMuscleGroup);
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Submit Workout");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				List<String> nName = session.createQuery("from exercises e where e.name = '" + textField.getText() + "'").getResultList();
@@ -113,7 +113,7 @@ public class SubmitExercise {
 				}
 			}
 		});
-		btnNewButton.setBounds(184, 145, 89, 23);
+		btnNewButton.setBounds(167, 150, 127, 23);
 		frame.getContentPane().add(btnNewButton);
 	}
 	
