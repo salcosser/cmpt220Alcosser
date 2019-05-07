@@ -1,5 +1,7 @@
+//Sam Alcosser
 import java.awt.EventQueue;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +13,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import java.awt.Color;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class Metrics {
 
@@ -23,7 +33,7 @@ public class Metrics {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Metrics window = new Metrics();
+					Metrics window = new Metrics(cUser);
 					window.frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -37,21 +47,23 @@ public class Metrics {
 		initialize(cUser);
 	}
 	
-	public int getIndexOfLargest( int[] array )
-	{
-	if(array.length == 1){
-		return array[0];
-	}
-	int currMax = 0;
-	 for(int h = 0;h<array.length;h++) {
-		 if(array[h] > array[currMax]) {
-			 currMax = h;
-		 }
+	//function from an online source to find the index in a list of integers that has the largest value
+	public  static int indexOfMax(int[] arr) {
+	    if (arr.length == 0) {
+	        return -1;
+	    }
 
-	 }
-	 	System.out.println("currmax val: " + array[currMax] + "currMax ind: " + currMax);
-		return currMax;
-		
+	    int max = arr[0];
+	    int maxIndex = 0;
+
+	    for (int i = 1; i < arr.length; i++) {
+	        if (arr[i] > max) {
+	            maxIndex = i;
+	            max = arr[i];
+	        }
+	    }
+
+	    return maxIndex;
 	}
 	/**
 	 * Initialize the contents of the frame.
@@ -64,7 +76,7 @@ public class Metrics {
 		frame.getContentPane().setBackground(new Color(0, 191, 255));
 		frame.getContentPane().setLayout(null);
 		
-		
+		//long list of sessions needed to reference over the course of the code
 		SessionFactory factoryExerciseDone = new Configuration()
 				.configure()
 				.addAnnotatedClass(exerciseDone.class)
@@ -107,33 +119,91 @@ public class Metrics {
 			for(int j = 0;j<eDones.size();j++) { //going through each of the exercises done
 				if(eDones.get(j).getExerciseId() == currE) {
 					currEx.add(eDones.get(j));
+					continue;
 				}
 				if(currEx.size() >= 1) {
+					
 				int[] mReps = new int[currEx.size()];	//array to hold the total reps of each exercise done
 				for(int k = 0; k<currEx.size();k++) {
 					mReps[k] = ( (currEx.get(k).getReps())*(currEx.get(k).getSets() )); //computing
+					
 				}
-				System.out.println(mReps.toString());
-				maxesList.add(currEx.get(getIndexOfLargest(mReps)-1));
+				int bInmReps = indexOfMax(mReps);	//getting the index of the exercise with the most reps out of the list
+				System.out.println(mReps[bInmReps]);
+				System.out.println("reps"+ currEx.get(bInmReps).getReps());
+				maxesList.add(currEx.get(indexOfMax(mReps)));
+				}
+				else {
+					continue;
 				}
 				currEx.clear();
 				
 			}
 			
 		}
+		//making a string list of all of the data so that it can be later used in a list
 		String[] listVersionMax = new String[maxesList.size()];
 		for(int n = 0;n<maxesList.size();n++) {
 			int exId =  maxesList.get(n).getExerciseId();
 			List<exercises> exName = sessionE.createQuery("from exercises e where e.idExercises = " + exId).getResultList();
-			listVersionMax[n] = new String(exName.get(n).getName().toString() + " | sets: "  + 
+			listVersionMax[n] = new String(exName.get(0).getName().toString() + " | sets: "  + 
 					maxesList.get(n).getSets() + " | reps: " + maxesList.get(n).getReps() + 
-					" | weight: " + maxesList.get(n).getWeight()
+					" | weight: " + maxesList.get(n).getWeight() + " lbs"
 					);
 		}
 		JList list = new JList(listVersionMax);
-		list.setBounds(63, 55, 95, 141);
+		list.setBounds(63, 55, 435, 192);
 		frame.getContentPane().add(list);
-		frame.setBounds(100, 100, 450, 300);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	//simple back button that returns back to the homepage and closes the sessions
+				frame.setVisible(false);
+				Homepage home = new Homepage(cUser);
+				home.frame.setVisible(true);
+				sessionE.close();
+				sessionED.close();
+				sessionWO.close();
+			}
+		});
+		btnBack.setBounds(0, 0, 89, 23);
+		frame.getContentPane().add(btnBack);
+		String[] exListNames = new String[exList.size()];
+		for(int i = 0; i<exList.size(); i++) {
+			exListNames[i] = exList.get(i).getName().toString();
+		}
+		System.out.println(exList.size());
+		
+		JComboBox comboBox = new JComboBox(exListNames);
+		comboBox.setBounds(121, 283, 171, 23);
+		frame.getContentPane().add(comboBox);
+		
+		//extra function that allows the user to see the max weight they used, and if there wasnt one, then the error is caught by a try catch statement
+		JButton btnSelect = new JButton("Select");
+		btnSelect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String selected = comboBox.getSelectedItem().toString();
+				List<exercises> name = sessionE.createQuery("from exercises e where e.name = '"+ selected + "'").getResultList();
+				int idNo = name.get(0).getIdExercises();
+				List<Double> mWeight = sessionED.createQuery("select max(weight) from exerciseDone f where f.exerciseId = " +idNo ).getResultList();
+				
+				try {
+					double max =  mWeight.get(0);
+					JOptionPane.showMessageDialog(frame, "max weight was " + max + " lbs.");
+				}catch(Exception e) {
+					JOptionPane.showMessageDialog(frame, "No exercise recorded.");
+				}
+				
+			}
+		});
+		btnSelect.setBounds(371, 283, 89, 23);
+		frame.getContentPane().add(btnSelect);
+		
+		JLabel lblMaxForSelected = new JLabel("Max Weight For Selected Workout");
+		lblMaxForSelected.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMaxForSelected.setBounds(161, 258, 277, 14);
+		frame.getContentPane().add(lblMaxForSelected);
+		frame.setBounds(100, 100, 639, 549);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 }
 }

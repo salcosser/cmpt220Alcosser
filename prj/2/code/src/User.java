@@ -1,4 +1,4 @@
-
+//Sam Alcosser
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users")
+@Table(name="users")	//connecting to the correct table
 public class User {
+	//Connecting the variables to the correct columns in the database table
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
@@ -24,6 +26,8 @@ public class User {
 	private String password;
 	@Column(name = "injury")
 	private String injury;
+	
+	//Setters and getters (auto generated)
 	public String getInjury() {
 		return injury;
 	}
@@ -75,7 +79,9 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	
+	//auto generated constructor and toString methods
 	public User(String fullName, String username, String email, String password) {
 		super();
 		this.fullName = fullName;

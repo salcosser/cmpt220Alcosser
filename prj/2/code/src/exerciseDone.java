@@ -38,7 +38,7 @@ public class exerciseDone implements Serializable{
 	private int idEDone;			//making the primary key of the exercise class
 	
 	
-	@Column(name = "exerciseid")				// linking the different variables to the columns in the entity
+	@Column(name = "exerciseid")				// linking the different variables to the columns in the entity, as this is a mapping class
 	private int exerciseId;
 	
 	@Column(name="reps")
@@ -48,9 +48,9 @@ public class exerciseDone implements Serializable{
 	private int sets;
 	
 	@ManyToOne(optional=false)
-	@JoinColumn(name="workoutid", nullable=false, updatable=false)
+	@JoinColumn(name="workoutid", nullable=false, updatable=false) //linking the exercise to the workout that it is a part of
 	private Workout wO;
-	//@JoinColumn(name="workoutid", referencedColumnName="workoutid")
+
 	
 	
 	
@@ -60,7 +60,7 @@ public class exerciseDone implements Serializable{
 	
 
 	
-	
+	//setters and getters
 	public int getWorkoutId() {
 		return wO.getWorkoutid();
 	}
@@ -80,7 +80,7 @@ public class exerciseDone implements Serializable{
 
 
 	
-	public double getWeight() {				//setters and getters
+	public double getWeight() {				
 		return weight;
 	}
 
@@ -122,7 +122,7 @@ public class exerciseDone implements Serializable{
 	}
 
 
-
+	//generated tostring method and constructor
 	@Override
 	public String toString() {
 		return "exerciseDone [idEDone=" + idEDone + ", exerciseId=" + exerciseId + ", reps=" + reps + ", sets=" + sets

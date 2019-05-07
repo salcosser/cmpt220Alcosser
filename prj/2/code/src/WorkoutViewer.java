@@ -1,3 +1,4 @@
+//Sam Alcosser
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -27,7 +28,7 @@ public class WorkoutViewer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					WorkoutViewer window = new WorkoutViewer();
+					WorkoutViewer window = new WorkoutViewer(cUser, sWo);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,6 +54,8 @@ public class WorkoutViewer {
 		frame.setBounds(100, 100, 624, 530);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		//sessions are necessary to query the correct information
 		SessionFactory factoryPrevWorkouts = new Configuration()
 				.configure()
 				.addAnnotatedClass(exerciseDone.class)
@@ -67,7 +70,10 @@ public class WorkoutViewer {
 		//create session
 		Session sessionEx = factoryE.getCurrentSession();
 		sessionEx.beginTransaction();
+		//using PKs to get the right exercises from the right workout
 		int key = sWo.getWorkoutid();
+		
+		//getting all the exercises done in this workout, then making a string array that for all intents and purposes does a toString on each of the exercises done
 		List<exerciseDone> eDones = sessioneDones.createQuery("from exerciseDone e where workoutid = " + key).getResultList();
 		String[] eDList = new String[eDones.size()];
 		for(int i = 0;i<eDones.size();i++) {

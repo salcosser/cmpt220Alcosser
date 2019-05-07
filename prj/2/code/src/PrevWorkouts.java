@@ -1,3 +1,4 @@
+//Sam Alcosser
 import java.awt.EventQueue;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -48,21 +49,21 @@ public class PrevWorkouts {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(User cUser) {
-		SessionFactory factoryPrevWorkouts = new Configuration()
+		SessionFactory factoryPrevWorkouts = new Configuration()	//creating the session factory and session to connect to the workout table
 				.configure()
 				.addAnnotatedClass(Workout.class)
 				.buildSessionFactory();
 		//create session
 		Session sessionPWorkouts = factoryPrevWorkouts.getCurrentSession();
 		sessionPWorkouts.beginTransaction();
-		List<Workout> wOs = sessionPWorkouts.createQuery("from Workout w where w.userId="+ cUser.getId()).getResultList();
+		List<Workout> wOs = sessionPWorkouts.createQuery("from Workout w where w.userId="+ cUser.getId()).getResultList();	//simply listing all the workouts the user has done by date
 		Date[] wOList = new Date[wOs.size()];
 		for(int i = 0; i<wOs.size();i++) {
 			wOList[i] = wOs.get(i).getDate();
 			
 		}
 		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(112, 128, 144));
+		frame.getContentPane().setBackground(new Color(0, 191, 255));
 		frame.getContentPane().setLayout(null);
 		
 		JList list = new JList(wOList);
@@ -76,7 +77,7 @@ public class PrevWorkouts {
 		
 		JButton btnSelectWorkout = new JButton("Select Workout");
 		btnSelectWorkout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {	//gets the selected workout and sends it along with the current user to the workout viewer page
 				int sWo = list.getSelectedIndex();
 				 List<Workout>selWorkouts=  sessionPWorkouts.createQuery("from Workout w where workoutid = " + wOs.get(sWo).getWorkoutid()).getResultList();
 				 Workout sWorkout = selWorkouts.get(0);

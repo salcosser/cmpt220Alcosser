@@ -1,3 +1,4 @@
+//Sam ALcosser
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,11 +67,13 @@ public class Tracker {
 		
 		frame = new JFrame();
 		frame.getContentPane().setForeground(Color.WHITE);
-		frame.getContentPane().setBackground(Color.DARK_GRAY);
+		frame.getContentPane().setBackground(new Color(0, 191, 255));
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(100, 100, 628, 339);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		//Building the resources needed for this very complex application
 		
 		SessionFactory factoryExerciseDone = new Configuration()
 				.configure()
@@ -96,6 +99,7 @@ public class Tracker {
 		Session sessionWO = factoryWO.getCurrentSession();
 		sessionWO.beginTransaction();
 		System.out.println(w.getWorkoutid());
+		//connecting to the newly created workout
 		try {
 			int currWOID = w.getWorkoutid();
 			List<Workout> wO = sessionWO.createQuery("from Workout w where w.workoutid = " + currWOID, Workout.class).getResultList();
@@ -106,12 +110,17 @@ public class Tracker {
 			e.printStackTrace();
 			System.out.println("ERROR");
 		}
+		//this code is repeated from the try catch statement for stability reasons
 		int currWOID = w.getWorkoutid();
 		List<Workout> wO = sessionWO.createQuery("from Workout w where w.workoutid = " + currWOID, Workout.class).getResultList();
 		Workout wOCurrent = wO.get(0);
 		sessionWO.close();
-		System.out.println("length of the query of the workouts of id: "+ w.getWorkoutid()+ "is" + wO.size());
-		System.out.println(w.toString());
+		//useful to debug the code, uncomment lines 119 and 120 to debug
+		//System.out.println("length of the query of the workouts of id: "+ w.getWorkoutid()+ "is" + wO.size());
+		//System.out.println(w.toString());
+		
+		
+		//getting and constructing a list of the exercise names
 		List<exercises> exList = sessionE.createQuery("from exercises").getResultList();
 		String[] exListNames = new String[exList.size()];
 		for(int i = 0; i<exList.size(); i++) {
@@ -164,6 +173,7 @@ public class Tracker {
 		
 		JButton btnAddExercise = new JButton("Add Exercise");
 		btnAddExercise.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 			double imperialMass = Double.valueOf(impMass.getText());
 			List<exercises> exIdFinder = sessionE.createQuery("from exercises e where e.name = '"+ excerciseSelector.getSelectedItem().toString() + "'").getResultList();
@@ -171,7 +181,7 @@ public class Tracker {
 			int sets = (int) setsCount.getValue();
 			int reps = (int) repsCount.getValue();
 			exerciseDone nExD = new exerciseDone(exId, reps, sets,wOCurrent,imperialMass);
-			System.out.println(nExD.toString()); 			//debugging line
+			//System.out.println(nExD.toString()); 			//debugging line, uncomment to debug
 			
 			sessionED.save(nExD);
 			}
@@ -181,7 +191,7 @@ public class Tracker {
 		
 		JButton btnSaveWorkout = new JButton("Save Workout");
 		btnSaveWorkout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {//saving the workout, using a try catch block for stability
 				
 				try {
 					sessionED.getTransaction().commit();
@@ -191,11 +201,14 @@ public class Tracker {
 					n.printStackTrace();
 					System.out.println("***********");
 				}
-				JOptionPane.showMessageDialog(frame, "Workout submitted");
+				JOptionPane.showMessageDialog(frame, "Workout submitted");	//going back to the mome
 				frame.setVisible(false);
 				frame.dispose();
 				Homepage reHome = new Homepage(cUser);
 				reHome.frame.setVisible(true);
+				sessionED.close();
+				sessionE.close();
+				sessionWO.close();
 			}
 		});
 		btnSaveWorkout.setBounds(217, 216, 156, 31);

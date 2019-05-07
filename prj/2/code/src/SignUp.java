@@ -1,4 +1,4 @@
-
+//Sam Alcosser
 import java.awt.EventQueue;
 
 
@@ -58,7 +58,7 @@ public class SignUp {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setBackground(new Color(135, 206, 235));
+		frame.getContentPane().setBackground(new Color(0, 191, 255));
 		frame.setBounds(100, 100, 798, 641);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -163,7 +163,7 @@ public class SignUp {
 						System.out.println(u);
 					}
 				}
-				else {
+				else { //catching if any field is not filled out
 					if(new String(password.getPassword()).equals(new String(passConfirm.getPassword()))) {
 						if(
 								(fullName.getText().toString().equalsIgnoreCase(null))

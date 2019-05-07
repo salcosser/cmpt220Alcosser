@@ -1,3 +1,4 @@
+//Sam Alcosser
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +77,7 @@ public class SubmitExercise {
 		frame.getContentPane().add(lblSubmitNewExercise);
 		
 		
-		List<String> mGroup = session.createQuery("select distinct e.mGroup from exercises e").getResultList();
+		List<String> mGroup = session.createQuery("select distinct e.mGroup from exercises e").getResultList(); //getting all individual muscle groups with a fancy SQL/HQL query
 		String[] mGroups = new String[mGroup.size()];
 		for(int i = 0;i<mGroup.size();i++) {
 			mGroups[i] = mGroup.get(i);
@@ -87,7 +88,7 @@ public class SubmitExercise {
 		
 		JLabel lblExerciseName = new JLabel("Exercise Name");
 		lblExerciseName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblExerciseName.setBounds(107, 77, 80, 14);
+		lblExerciseName.setBounds(96, 77, 112, 14);
 		frame.getContentPane().add(lblExerciseName);
 		
 		JLabel lblMuscleGroup = new JLabel("Muscle Group");

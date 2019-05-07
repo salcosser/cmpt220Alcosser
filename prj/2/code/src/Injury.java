@@ -1,3 +1,4 @@
+//Sam Alcosser
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -56,6 +57,7 @@ public class Injury {
 	 */
 	private void initialize(User cUser) {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(0, 191, 255));
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		frame.setBounds(100, 100, 450, 300);
@@ -70,7 +72,7 @@ public class Injury {
 		lblInjuryReport.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblInjuryReport);
 		
-		JList list = new JList(mGroups);
+		JList list = new JList(mGroups); //listing the different muscle groups
 		list.setBorder(UIManager.getBorder("List.focusCellHighlightBorder"));
 		springLayout.putConstraint(SpringLayout.SOUTH, list, 160, SpringLayout.NORTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, list, 79, SpringLayout.WEST, frame.getContentPane());
@@ -86,7 +88,7 @@ public class Injury {
 			public void actionPerformed(ActionEvent e) {
 			String inj = (String)list.getSelectedValue();
 			
-			SessionFactory factory = new Configuration()
+			SessionFactory factory = new Configuration() //connecting to the user table 
 					.configure()
 					.addAnnotatedClass(User.class)
 					.buildSessionFactory();
@@ -94,6 +96,7 @@ public class Injury {
 			Session session = factory.getCurrentSession();
 			session.beginTransaction();
 			Transaction tx = session.getTransaction();
+			//selecting the right user, and then assigning the injury to that user
 			List<User> uUsers = session.createQuery("from User u where u.username = '"+ cUser.getUsername() + "'").getResultList();
 			User uUser = uUsers.get(0);
 			uUser.setInjury(inj);
@@ -103,6 +106,7 @@ public class Injury {
 			frame.setVisible(false);
 			Homepage home = new Homepage(cUser);
 			home.frame.setVisible(true);
+			session.close();
 			}
 		});
 		springLayout.putConstraint(SpringLayout.NORTH, btnNewButton, 47, SpringLayout.SOUTH, lblInjuryReport);

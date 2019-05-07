@@ -1,3 +1,4 @@
+//Sam Alcosser
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -13,20 +14,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table(name="exercises")
+@Table(name="exercises") //connecting to the table
 public class exercises implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)		//assigning class variables to columns in the table, as this is a mapping class
 	@Column(name="idexercises")
 	private int idExercises;
 	@Column(name="name")
 	private String name;
 	@Column(name="muscle_group")
 	private String mGroup;
+	
+	//setters and getters
 	public int getIdExercises() {
 		return idExercises;
 	}
@@ -45,6 +48,7 @@ public class exercises implements Serializable {
 	public void setmGroup(String mGroup) {
 		this.mGroup = mGroup;
 	}
+	//generated tostring and constructor
 	@Override
 	public String toString() {
 		return "exercises [idExercises=" + idExercises + ", name=" + name + ", mGroup=" + mGroup + "]";
