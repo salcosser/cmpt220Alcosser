@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
 
 public class PrevWorkouts {
 
@@ -66,14 +67,21 @@ public class PrevWorkouts {
 		frame.getContentPane().setBackground(new Color(0, 191, 255));
 		frame.getContentPane().setLayout(null);
 		
-		JList list = new JList(wOList);
-		list.setBounds(47, 73, 318, 113);
-		frame.getContentPane().add(list);
-		
 		JLabel test = new JLabel(cUser.getUsername().toString());
 		test.setHorizontalAlignment(SwingConstants.CENTER);
-		test.setBounds(10, 191, 185, 59);
+		test.setBounds(10, 211, 185, 59);
 		frame.getContentPane().add(test);
+		
+		JList list = new JList(wOList);
+		list.setBounds(97, 261, 342, 167);
+		frame.getContentPane().add(list);
+		list.setVisibleRowCount(500);
+		frame.setBounds(100, 100, 500, 328);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JScrollPane scrollPane = new JScrollPane(list);
+		scrollPane.setBounds(84, 49, 344, 169);
+		frame.getContentPane().add(scrollPane);
 		
 		JButton btnSelectWorkout = new JButton("Select Workout");
 		btnSelectWorkout.addActionListener(new ActionListener() {
@@ -87,10 +95,14 @@ public class PrevWorkouts {
 				 wOView.frame.setVisible(true);
 			}
 		});
-		btnSelectWorkout.setBounds(283, 209, 122, 23);
+		btnSelectWorkout.setBounds(217, 229, 122, 23);
 		frame.getContentPane().add(btnSelectWorkout);
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+		
+		
+		
+		
 		
 		
 		
