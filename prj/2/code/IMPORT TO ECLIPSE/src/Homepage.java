@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.SpringLayout;
 
 public class Homepage {
@@ -181,11 +182,16 @@ public class Homepage {
 		JButton btnRemoveInjury = new JButton("remove injury");
 		btnRemoveInjury.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) { //function that clears the injury field for the cUser
+				
+				try {
 				List<User> cUsers = session.createQuery("from User u where u.username='"+ cUser.getUsername() + "'").getResultList();
 				User uUser = cUsers.get(0);
 				uUser.setInjury(null);
 				session.update(uUser);
 				session.getTransaction().commit();
+				}catch(Exception e) {
+					JOptionPane.showMessageDialog(frame, "There is no current injury");
+				}
 			}
 		});
 		springLayout.putConstraint(SpringLayout.SOUTH, btnRemoveInjury, 0, SpringLayout.SOUTH, btnMyBest);
