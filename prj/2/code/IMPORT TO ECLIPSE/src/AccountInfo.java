@@ -82,9 +82,12 @@ public class AccountInfo {
 		email.setBounds(167, 130, 185, 14);
 		frame.getContentPane().add(email);
 		
-		JLabel injval = new JLabel(cUser.getInjury().toString());
-		injval.setBounds(167, 175, 185, 14);
-		frame.getContentPane().add(injval);
+		if((cUser.getInjury().toString() != null) && (cUser.getInjury().toString() != "")) {
+			JLabel injval = new JLabel(cUser.getInjury().toString());
+			injval.setBounds(167, 175, 185, 14);
+			frame.getContentPane().add(injval);
+		}
+		
 		
 		//simple function that creates a working back button
 		JButton btnBack = new JButton("Back");
