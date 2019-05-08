@@ -1,3 +1,7 @@
-root password = CamelRacer9000
+create a database in MySQL called workouttracker with the following parameters
+
+root password = CamelRacer9000      ---for connection
 admin username = db_admin_5003
 admin password = 8523programming@62
+
+then import the four sql files from the MYSQL folder
