@@ -15,6 +15,7 @@ import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -147,13 +148,12 @@ public class Metrics {
 			int exId =  maxesList.get(n).getExerciseId();
 			List<exercises> exName = sessionE.createQuery("from exercises e where e.idExercises = " + exId).getResultList();
 			listVersionMax[n] = new String(exName.get(0).getName().toString() + " | sets: "  + 
-					maxesList.get(n).getSets() + " | reps: " + maxesList.get(n).getReps() + 
+					maxesList.get(n).getSets() + " | reps: " + maxesList.get(n).getReps() + " | total reps: " + (maxesList.get(n).getReps() * maxesList.get(n).getSets()) +
 					" | weight: " + maxesList.get(n).getWeight() + " lbs"
 					);
 		}
-		JList list = new JList(listVersionMax);
-		list.setBounds(63, 55, 435, 192);
-		frame.getContentPane().add(list);
+		
+		
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
@@ -175,7 +175,7 @@ public class Metrics {
 		System.out.println(exList.size());
 		
 		JComboBox comboBox = new JComboBox(exListNames);
-		comboBox.setBounds(121, 283, 171, 23);
+		comboBox.setBounds(45, 126, 171, 23);
 		frame.getContentPane().add(comboBox);
 		
 		//extra function that allows the user to see the max weight they used, and if there wasnt one, then the error is caught by a try catch statement
@@ -196,14 +196,29 @@ public class Metrics {
 				
 			}
 		});
-		btnSelect.setBounds(371, 283, 89, 23);
+		btnSelect.setBounds(316, 126, 89, 23);
 		frame.getContentPane().add(btnSelect);
 		
 		JLabel lblMaxForSelected = new JLabel("Max Weight For Selected Workout");
 		lblMaxForSelected.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMaxForSelected.setBounds(161, 258, 277, 14);
+		lblMaxForSelected.setBounds(107, 97, 277, 14);
 		frame.getContentPane().add(lblMaxForSelected);
+		
+		JLabel lblTheMaximumReps = new JLabel("The maximum reps for each exercise recorded");
+		lblTheMaximumReps.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTheMaximumReps.setBounds(128, 285, 317, 14);
+		frame.getContentPane().add(lblTheMaximumReps);
+		
+
+		JList list = new JList(listVersionMax);
+		list.setBounds(63, 55, 485, 192);
+		frame.getContentPane().add(list);
 		frame.setBounds(100, 100, 639, 549);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JScrollPane scrollPane = new JScrollPane(list);
+		scrollPane.setBounds(63, 336, 447, 150);
+		frame.getContentPane().add(scrollPane);
+		
 }
 }
