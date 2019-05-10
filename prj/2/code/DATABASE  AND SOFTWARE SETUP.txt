@@ -6,5 +6,4 @@ admin password = 8523programming@62
 
 then import the four sql files from the MYSQL folder
 
-
-import all files from the eclipse folder into a completely empty project called workout tracker
+import the workoutTracker project to eclipse
