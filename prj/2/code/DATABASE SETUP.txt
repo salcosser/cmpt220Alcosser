@@ -1,3 +1,0 @@
-root password = CamelRacer9000
-admin username = db_admin5003
-admin password = 8523programming@62
