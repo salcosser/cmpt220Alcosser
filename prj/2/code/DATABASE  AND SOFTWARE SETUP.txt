@@ -7,3 +7,6 @@ admin password = 8523programming@62
 then import the four sql files from the MYSQL folder
 
 import the workoutTracker project to eclipse
+
+**make sure that you have installed swing into eclipse, as well as all necessary software components to run JFramesv(This program relies heavily on JFrames and JFrame components to properly function)**
+
